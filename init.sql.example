@@ -2,3 +2,5 @@
 CREATE USER example WITH ENCRYPTED PASSWORD 'examplepass';
 
 CREATE DATABASE example;
+
+CREATE GROUP example_users WITH USER user1, user2;
