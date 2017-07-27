@@ -16,7 +16,9 @@ Set up three docker hosts,
 
 Let's run a single etcd node for now:
 
+```
 docker -H tcp://server1:2375 run -d --name etcd1 --net host coreos/etcd -addr 192.168.42.1:4001 -peer-addr 192.168.42.1:4002
+```
 
 Now let's run up three governor nodes:
 
