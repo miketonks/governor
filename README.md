@@ -6,7 +6,7 @@ Automatic Failover.  Zero Downtime Upgrades.  Configurable via ENV variables, wi
 
 This is a fork of https://github.com/compose/governor with a few improvements to make it cluster safe and production ready.
 
-USAGE:
+## USAGE
 
 Set up three docker hosts,
 
