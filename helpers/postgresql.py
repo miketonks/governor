@@ -204,6 +204,24 @@ class Postgresql:
         else:
             logger.info("No pg_hba.conf file found - skipping")
 
+        if os.path.exists('pg_extras.conf'):
+            logger.info("Copying pg_extras.conf file")
+            shutil.copy2('pg_extras.conf', self.data_dir)
+        else:
+            logger.info("No pg_extras.conf file found - writing empty file")
+            with open("%s/pg_extras.conf" % self.data_dir, "w"):
+                pass
+
+        pgconf = "%s/postgresql.conf" % self.data_dir
+        line = "include = 'pg_extras.conf'"
+        with open(pgconf, "r") as f:
+            if any(line == l.rstrip("\r\n") for l in f.readlines()):
+                logger.info("pg_extras.conf include found")
+                return
+
+        logger.info("Adding pg_extras.conf include")
+        with open(pgconf, "a") as f:
+            f.write(line + "\n")
 
     def write_recovery_conf(self, leader_hash):
         f = open("%s/recovery.conf" % self.data_dir, "w")
